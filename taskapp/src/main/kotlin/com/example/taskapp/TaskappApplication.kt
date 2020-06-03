@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.ConfigurableApplicationContext
+import org.springframework.context.annotation.Bean
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.kafka.support.SendResult
@@ -16,12 +17,21 @@ import java.util.concurrent.TimeUnit
 
 
 @SpringBootApplication
-class TaskappApplication
+class TaskappApplication{
+	@Bean
+	fun messageProducer(): MessageProducers? {
+		return MessageProducers()
+	}
+
+	@Bean
+	fun messageListener(): MessageListeners? {
+		return MessageListeners()
+	}
+}
+
 
 fun main(args: Array<String>) {
 	 val context: ConfigurableApplicationContext = runApplication<TaskappApplication>(*args)
-	context.getBean(MessageProducer::class.java)
-	context.getBean(MessageListener::class.java)
 
 	val producer: MessageProducers =	context.getBean(MessageProducers::class.java)
 	val listener: MessageListeners = context.getBean(MessageListeners::class.java)

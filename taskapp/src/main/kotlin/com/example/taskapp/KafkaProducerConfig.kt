@@ -19,7 +19,7 @@ class KafkaProducerConfig{
     private val bootstrapAddress: String? = null
 
     @Bean
-    fun producerFactory(): ProducerFactory<Any, Any> {
+    fun producerFactory(): ProducerFactory<String, String> {
         val configProps: MutableMap<String, Any?> = HashMap()
         configProps[ProducerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapAddress
         configProps[ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG] = StringSerializer::class.java
@@ -28,12 +28,12 @@ class KafkaProducerConfig{
     }
 
     @Bean
-    fun kafkaTemplate(): Any? {
+    fun kafkaTemplate(): KafkaTemplate<String, String> {
         return KafkaTemplate(producerFactory())
     }
 
     @Bean
-    fun greetingProducerFactory(): ProducerFactory<Any, Any> {
+    fun greetingProducerFactory(): ProducerFactory<String, Greeting> {
         val configProps: MutableMap<String, Any?> = HashMap()
         configProps[ProducerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapAddress
         configProps[ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG] = StringSerializer::class.java
@@ -42,7 +42,7 @@ class KafkaProducerConfig{
     }
 
     @Bean
-    fun greetingKafkaTemplate(): Any? {
+    fun greetingKafkaTemplate(): KafkaTemplate<String,Greeting> {
         return KafkaTemplate(greetingProducerFactory())
     }
 }

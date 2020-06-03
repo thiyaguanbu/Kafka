@@ -9,11 +9,12 @@ import org.springframework.util.concurrent.ListenableFutureCallback
 
 class MessageProducer {
 
-    @Autowired
-    private val kafkaTemplate: KafkaTemplate<String?, String>? = null
 
     @Autowired
-    private val greetingKafkaTemplate: KafkaTemplate<String, Greeting>? = null
+    private var kafkaTemplate: KafkaTemplate<String, String>? = null
+
+    @Autowired
+    private var greetingKafkaTemplate: KafkaTemplate<String, Greeting>? = null
 
     @Value(value = "\${message.topic.name}")
     private val topicName: String? = null

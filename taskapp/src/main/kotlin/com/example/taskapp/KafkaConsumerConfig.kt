@@ -37,7 +37,7 @@ class KafkaConsumerConfig{
     fun greetingConsumerFactory(): ConsumerFactory<String?, Greeting?> {
         val props: MutableMap<String, Any> = HashMap()
         props[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapAddress!!
-        props[ConsumerConfig.GROUP_ID_CONFIG] = "greeting"
+        props[ConsumerConfig.GROUP_ID_CONFIG] = "welcome"
 //        return DefaultKafkaConsumerFactory<Any?, Any?>(props, StringDeserializer(), JsonDeserializer<Any?>(Greeting::class.java))
         return DefaultKafkaConsumerFactory<String?, Greeting?>(props,StringDeserializer(), JsonDeserializer<Greeting>(Greeting::class.java))
     }
